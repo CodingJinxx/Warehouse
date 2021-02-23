@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/.idea.Warehouse.iml
+/projectSettingsUpdater.xml
+/modules.xml
+/contentModel.xml
+# Datasource local storage ignored files
+/../../../../../../../../../../../:\Users\Jay\OneDrive\Jay\3BHIT\SEW\Warehouse\.idea\.idea.Warehouse\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
