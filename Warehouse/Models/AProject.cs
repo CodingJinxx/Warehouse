@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Warehouse.Models
 {
     [Table("PROJECTS")]
-    public class Project
+    public abstract class AProject
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

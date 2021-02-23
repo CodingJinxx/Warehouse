@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Warehouse.Models
 {
     [Table("RESEARCH_FUNDING_PROJECTS")]
-    public class ResearchFundingProject : Project
+    public class ResearchFundingProject : AProject
     {
         [Required]
         [Column("IS_FWF_SPONSORED", TypeName = "TINYINT(1)")]

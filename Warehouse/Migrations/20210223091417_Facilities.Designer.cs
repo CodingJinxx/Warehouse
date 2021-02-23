@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Warehouse.Models;
 
 namespace Warehouse.Migrations
 {
     [DbContext(typeof(WarehouseContext))]
-    partial class WarehouseContextModelSnapshot : ModelSnapshot
+    [Migration("20210223091417_Facilities")]
+    partial class Facilities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,23 +41,6 @@ namespace Warehouse.Migrations
                     b.ToTable("PROJECTS");
                 });
 
-            modelBuilder.Entity("Warehouse.Models.Debitor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("DEBITOR_ID");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(100)")
-                        .HasColumnName("NAME");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DEBITOR");
-                });
-
             modelBuilder.Entity("Warehouse.Models.Facility", b =>
                 {
                     b.Property<int>("Id")
@@ -79,30 +64,9 @@ namespace Warehouse.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FACILITY");
+                    b.ToTable("Facilities");
 
                     b.HasDiscriminator<string>("FACILITY_TYPE").HasValue("FACILITY");
-                });
-
-            modelBuilder.Entity("Warehouse.Models.Funding", b =>
-                {
-                    b.Property<int>("DebitorId")
-                        .HasColumnType("int")
-                        .HasColumnName("DEBTIOR_ID");
-
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("int")
-                        .HasColumnName("PROJECT_ID");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("DECIMAL(38,17)")
-                        .HasColumnName("FUNDING_AMOUNT");
-
-                    b.HasKey("DebitorId", "ProjectId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("FUNDING");
                 });
 
             modelBuilder.Entity("Warehouse.Models.Subproject", b =>
@@ -125,9 +89,6 @@ namespace Warehouse.Migrations
                         .HasColumnType("TINYINT(1)")
                         .HasColumnName("FOCUS_RESEARCH");
 
-                    b.Property<int?>("INSTITUTE_ID")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ProjectId")
                         .HasColumnType("int");
 
@@ -136,8 +97,6 @@ namespace Warehouse.Migrations
                         .HasColumnName("THEORETICAL_RESEARCH");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("INSTITUTE_ID");
 
                     b.HasIndex("ProjectId");
 
@@ -178,8 +137,6 @@ namespace Warehouse.Migrations
                 {
                     b.HasBaseType("Warehouse.Models.Facility");
 
-                    b.ToTable("FACILITY");
-
                     b.HasDiscriminator().HasValue("Faculty");
                 });
 
@@ -187,41 +144,14 @@ namespace Warehouse.Migrations
                 {
                     b.HasBaseType("Warehouse.Models.Facility");
 
-                    b.ToTable("FACILITY");
-
                     b.HasDiscriminator().HasValue("INSTITUTE");
-                });
-
-            modelBuilder.Entity("Warehouse.Models.Funding", b =>
-                {
-                    b.HasOne("Warehouse.Models.Debitor", "Debitor")
-                        .WithMany()
-                        .HasForeignKey("DebitorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Warehouse.Models.AProject", "Project")
-                        .WithMany()
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Debitor");
-
-                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("Warehouse.Models.Subproject", b =>
                 {
-                    b.HasOne("Warehouse.Models.Institute", "Institute")
-                        .WithMany()
-                        .HasForeignKey("INSTITUTE_ID");
-
                     b.HasOne("Warehouse.Models.AProject", "Project")
                         .WithMany()
                         .HasForeignKey("ProjectId");
-
-                    b.Navigation("Institute");
 
                     b.Navigation("Project");
                 });

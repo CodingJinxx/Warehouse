@@ -26,5 +26,11 @@ namespace Warehouse.Models
         [Column("FOCUS_RESEARCH", TypeName = "TINYINT(1)")]
         [Required]
         public bool FocusResearch { get; set; }
+        
+        [Column("PROJECT_ID")] 
+        public AProject Project { get; set; }
+
+        [ForeignKey("INSTITUTE_ID")]
+        public Institute Institute { get; set; }
     }
 }

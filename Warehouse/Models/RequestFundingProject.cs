@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Warehouse.Models
 {
     [Table("REQUEST_FUNDING_PROJECTS")]
-    public class RequestFundingProject : Project
+    public class RequestFundingProject : AProject
     {
         [Required]
         [Column("IS_SMALL_PROJECT", TypeName = "TINYINT(1)")]
